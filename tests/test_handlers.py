@@ -80,13 +80,12 @@ def test_route_handler_param_handling(
         assert result.path == url
         if status_code:
             assert result.status_code == status_code
+        elif http_method == HttpMethod.POST:
+            assert result.status_code == HTTP_201_CREATED
+        elif http_method == HttpMethod.DELETE:
+            assert result.status_code == HTTP_204_NO_CONTENT
         else:
-            if http_method == HttpMethod.POST:
-                assert result.status_code == HTTP_201_CREATED
-            elif http_method == HttpMethod.DELETE:
-                assert result.status_code == HTTP_204_NO_CONTENT
-            else:
-                assert result.status_code == HTTP_200_OK
+            assert result.status_code == HTTP_200_OK
 
 
 @pytest.mark.parametrize(

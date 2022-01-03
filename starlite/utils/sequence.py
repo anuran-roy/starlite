@@ -18,6 +18,6 @@ def unique(value: Iterable[T]) -> List[T]:
     except TypeError:
         output: List[T] = []
         for element in value:
-            if not any(v == element for v in output):
+            if all(v != element for v in output):
                 output.append(element)
         return output
